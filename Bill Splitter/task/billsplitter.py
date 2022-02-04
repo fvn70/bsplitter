@@ -1,3 +1,10 @@
+import random
+
+
+def calc_pay(bill, num):
+    pay = bill / num
+    return int(pay) if pay.is_integer() else round(pay, 2)
+
 
 num = int(input("Enter the number of friends joining (including you):\n"))
 if num <= 0:
@@ -10,10 +17,17 @@ else:
         dic[name] = 0
 
     bill = int(input("Enter the total bill value:\n"))
-    check = bill / num
-    check = round(check, 2) if check != bill // num else int(check)
-
+    pay = calc_pay(bill, num)
     for d in dic:
-        dic[d] = check
+        dic[d] = pay
 
-    print(dic)
+    if input('\nDo you want to use the "Who is lucky?" feature? Write Yes/No:\n') == "Yes":
+        lucky = random.choice(list(dic.keys()))
+        print(f"\n{lucky} is the lucky one!")
+        pay = calc_pay(bill, num - 1)
+        for name in dic.keys():
+            dic[name] = round(pay, 2) if name != lucky else 0
+    else:
+        print("\nNo one is going to be lucky")
+
+    # print(dic)
