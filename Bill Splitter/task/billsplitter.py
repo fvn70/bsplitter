@@ -30,4 +30,4 @@ else:
     else:
         print("\nNo one is going to be lucky")
 
-    # print(dic)
+    print(dic)
